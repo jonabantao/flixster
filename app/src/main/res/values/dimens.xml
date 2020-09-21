@@ -2,7 +2,7 @@
 <resources>
     <dimen name="list_item_padding">8dp</dimen>
     <dimen name="margin_spacing">8dp</dimen>
-    <dimen name="text_large">22dp</dimen>
+    <dimen name="movie_list_height">220dp</dimen>
     <dimen name="poster_width">135dp</dimen>
     <dimen name="poster_height">200dp</dimen>
     <dimen name="backdrop_width">384dp</dimen>

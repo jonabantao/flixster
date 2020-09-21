@@ -12,12 +12,14 @@ public class MovieListItem {
     private String overview;
     private String posterUrl;
     private String backdropUrl;
+    private double rating;
 
     public MovieListItem(JSONObject movieObject) throws JSONException {
         this.title = movieObject.getString("title");
         this.overview = movieObject.getString("overview");
         this.posterUrl = movieObject.getString("poster_path");
         this.backdropUrl = movieObject.getString("backdrop_path");
+        this.rating = movieObject.getDouble("vote_average");
     }
 
     public static List<MovieListItem> fromJSONArray(JSONArray moviesArray) throws JSONException {
@@ -44,6 +46,10 @@ public class MovieListItem {
 
     public String getBackdropUrl() {
         return "https://image.tmdb.org/t/p/w780" + backdropUrl;
+    }
+
+    public double getRating() {
+        return rating;
     }
 
     @Override

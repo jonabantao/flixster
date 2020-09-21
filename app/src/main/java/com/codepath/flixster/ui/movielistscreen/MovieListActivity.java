@@ -24,7 +24,7 @@ import okhttp3.Headers;
 public class MovieListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter<MovieListAdapter.ViewHolder> adapter;
+    private RecyclerView.Adapter<RecyclerView.ViewHolder> adapter;
 
     private final String TAG = this.getClass().getSimpleName();
     private List<MovieListItem> movies;
@@ -47,10 +47,6 @@ public class MovieListActivity extends AppCompatActivity {
                     JSONArray results = response.getJSONArray("results");
                     movies.addAll(MovieListItem.fromJSONArray(results));
                     adapter.notifyDataSetChanged();
-
-                    for (MovieListItem movie : movies) {
-                        Log.d(TAG, movie.toString());
-                    }
                 } catch (JSONException e) {
                     Log.e(TAG, "Results failed", e);
                 }
