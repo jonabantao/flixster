@@ -1,6 +1,8 @@
 package com.codepath.flixster.ui.movielistscreen;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +38,22 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
         public void bind(MovieListItem movie) {
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
+            // movie_placeholder from popcorn.app
             Glide.with(context)
-                    .load(movie.getPosterUrl())
+                    .load(getMovieImage(movie))
+                    .placeholder(R.drawable.movie_placeholder)
+                    .error(R.drawable.movie_placeholder)
                     .into(ivPoster);
+        }
+
+        public String getMovieImage(MovieListItem movie) {
+            Resources resources = context.getResources();
+
+            if (resources.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                return movie.getPosterUrl();
+            } else {
+                return movie.getBackdropUrl();
+            }
         }
     }
 

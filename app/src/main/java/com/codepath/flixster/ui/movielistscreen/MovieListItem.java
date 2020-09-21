@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieListItem {
-    private int id;
     private String title;
     private String overview;
     private String posterUrl;
+    private String backdropUrl;
 
     public MovieListItem(JSONObject movieObject) throws JSONException {
-        this.id = movieObject.getInt("id");
         this.title = movieObject.getString("title");
         this.overview = movieObject.getString("overview");
         this.posterUrl = movieObject.getString("poster_path");
+        this.backdropUrl = movieObject.getString("backdrop_path");
     }
 
     public static List<MovieListItem> fromJSONArray(JSONArray moviesArray) throws JSONException {
@@ -39,7 +39,11 @@ public class MovieListItem {
     }
 
     public String getPosterUrl() {
-        return "https://image.tmdb.org/t/p/original/" + posterUrl;
+        return "https://image.tmdb.org/t/p/w780" + posterUrl;
+    }
+
+    public String getBackdropUrl() {
+        return "https://image.tmdb.org/t/p/w780" + backdropUrl;
     }
 
     @Override
