@@ -3,16 +3,20 @@ package com.codepath.flixster.ui.movielistscreen;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class MovieListItem {
-    private String title;
-    private String overview;
-    private String posterUrl;
-    private String backdropUrl;
-    private double rating;
+    public String title;
+    public String overview;
+    public String posterUrl;
+    public String backdropUrl;
+    public double rating;
+
+    public MovieListItem() {}
 
     public MovieListItem(JSONObject movieObject) throws JSONException {
         this.title = movieObject.getString("title");
