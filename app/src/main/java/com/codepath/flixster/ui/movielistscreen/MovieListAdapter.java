@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Movie;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,13 +83,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public class BackdropViewHolder extends RecyclerView.ViewHolder {
+    public class BackdropViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView ivBackdrop;
         
         public BackdropViewHolder(@NonNull View itemView) {
             super(itemView);
             
             ivBackdrop = itemView.findViewById(R.id.movie_list_popular_image_view);
+
+            itemView.setOnClickListener(this);
         }
 
         public void bind(MovieListItem movie) {
@@ -99,6 +102,20 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     .centerCrop()
                     .into(ivBackdrop);
         }
+
+        @Override
+        public void onClick(View view) {
+            int pos = getAdapterPosition();
+
+            if (pos == RecyclerView.NO_POSITION) {
+                return;
+            }
+
+            MovieListItem movie = movies.get(pos);
+            Intent intent = new Intent(context, MovieDetailsActivity.class);
+            intent.putExtra(MovieListItem.class.getSimpleName(), Parcels.wrap(movie));
+            context.startActivity(intent);
+        }
     }
 
     public MovieListAdapter(Context context, List<MovieListItem> movies) {
@@ -108,9 +125,9 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        Double rating = movies.get(position).getRating();
+        MovieListItem movie = movies.get(position);
 
-        return rating.compareTo(7.5) > 0 ? POPULAR : DEFAULT;
+        return movie.isPopular() ? POPULAR : DEFAULT;
     }
 
     @NonNull

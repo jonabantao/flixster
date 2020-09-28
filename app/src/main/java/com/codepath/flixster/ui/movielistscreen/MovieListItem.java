@@ -56,6 +56,10 @@ public class MovieListItem {
         return rating;
     }
 
+    public boolean isPopular() {
+        return getRating() >= 7.5;
+    }
+
     @Override
     public String toString() {
         return String.format("%s: %s, URL: %s", title, overview, posterUrl);

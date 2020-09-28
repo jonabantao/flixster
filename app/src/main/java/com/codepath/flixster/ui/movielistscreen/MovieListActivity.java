@@ -23,7 +23,6 @@ import okhttp3.Headers;
 
 public class MovieListActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     private RecyclerView.Adapter<RecyclerView.ViewHolder> adapter;
 
     private final String TAG = this.getClass().getSimpleName();

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ui.moviedetails.MovieDetailsActivity"></activity>
+        <activity android:name=".ui.moviedetails.MovieDetailsActivity" />
         <activity android:name=".ui.movielistscreen.MovieListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
