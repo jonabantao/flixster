@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -29,6 +33,7 @@ dependencies {
     implementation 'com.codepath.libraries:asynchttpclient:0.0.9'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
     implementation 'org.parceler:parceler-api:1.1.12'
     implementation files('lib/YouTubeAndroidPlayerApi.jar')
     annotationProcessor 'org.parceler:parceler:1.1.12'

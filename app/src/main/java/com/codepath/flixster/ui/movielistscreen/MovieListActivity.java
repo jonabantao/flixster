@@ -1,6 +1,7 @@
 package com.codepath.flixster.ui.movielistscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.util.Log;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.codepath.flixster.R;
+import com.codepath.flixster.databinding.ActivityMoviesListBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +26,7 @@ import okhttp3.Headers;
 public class MovieListActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter<RecyclerView.ViewHolder> adapter;
+    private ActivityMoviesListBinding binding;
 
     private final String TAG = this.getClass().getSimpleName();
     private List<MovieListItem> movies;
@@ -31,7 +34,7 @@ public class MovieListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movies_list);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movies_list);
 
         setupRecyclerView();
 
@@ -62,7 +65,7 @@ public class MovieListActivity extends AppCompatActivity {
         movies = new ArrayList<>();
         adapter = new MovieListAdapter(this, movies);
 
-        RecyclerView recyclerView = findViewById(R.id.movie_list_recycler_view);
+        RecyclerView recyclerView = binding.movieListRecyclerView;
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

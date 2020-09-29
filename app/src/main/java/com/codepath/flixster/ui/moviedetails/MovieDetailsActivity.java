@@ -1,6 +1,7 @@
 package com.codepath.flixster.ui.moviedetails;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.codepath.flixster.R;
+import com.codepath.flixster.databinding.ActivityMovieDetailsBinding;
 import com.codepath.flixster.ui.movielistscreen.MovieListActivity;
 import com.codepath.flixster.ui.movielistscreen.MovieListItem;
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -30,29 +32,18 @@ import okhttp3.Headers;
 
 public class MovieDetailsActivity extends YouTubeBaseActivity {
 
+    private ActivityMovieDetailsBinding binding;
     private final String TAG = this.getClass().getSimpleName();
-
-    TextView tvTitle;
-    TextView tvOverview;
-    RatingBar ratingBar;
-    YouTubePlayerView ypvTrailer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_details);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details);
 
         final MovieListItem movie = Parcels.unwrap((getIntent().getParcelableExtra(MovieListItem.class.getSimpleName())));
 
-        tvTitle = findViewById(R.id.movie_details_title_text_view);
-        tvOverview = findViewById(R.id.movie_details_overview_text_view);
-        ratingBar = findViewById(R.id.movie_details_rating_bar);
-        ypvTrailer = findViewById(R.id.movie_details_trailer_youtube_view);
-
         if (movie != null) {
-            tvTitle.setText(movie.getTitle());
-            tvOverview.setText(movie.getOverview());
-            ratingBar.setRating((float) movie.getRating() / 2);
+            binding.setMovie(movie);
 
             AsyncHttpClient client = new AsyncHttpClient();
 
@@ -93,7 +84,7 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
     }
 
     private void initializeYouTubeView(final String id, final boolean isMoviePopular) {
-        ypvTrailer.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
+        binding.movieDetailsTrailerYoutubeView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
 
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {

@@ -1,19 +1,19 @@
 package com.codepath.flixster.ui.movielistscreen;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Movie;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +23,8 @@ import com.codepath.flixster.ui.moviedetails.MovieDetailsActivity;
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
@@ -53,6 +55,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             // movie_placeholder from popcorn.app
             Glide.with(context)
                     .load(getMovieImage(movie))
+                    .transform(new RoundedCornersTransformation(10, 0))
                     .placeholder(R.drawable.movie_placeholder)
                     .error(R.drawable.movie_placeholder)
                     .into(ivPoster);
@@ -79,7 +82,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             MovieListItem movie = movies.get(pos);
             Intent intent = new Intent(context, MovieDetailsActivity.class);
             intent.putExtra(MovieListItem.class.getSimpleName(), Parcels.wrap(movie));
-            context.startActivity(intent);
+
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    (Activity) context,
+                    Pair.create((View) ivPoster, "moviePoster"),
+                    Pair.create((View) tvTitle, "movieTitle"),
+                    Pair.create((View) tvOverview, "movieOverview")
+            );
+
+            context.startActivity(intent, options.toBundle());
         }
     }
 

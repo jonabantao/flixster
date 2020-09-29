@@ -62,6 +62,10 @@ public class MovieListItem {
         return rating;
     }
 
+    public float getFiveStarRating() {
+        return (float) rating / 2;
+    }
+
     public boolean isPopular() {
         return getRating() >= 7.5;
     }
