@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.flixster.R;
+import com.codepath.flixster.databinding.ItemMoviesListBackdropBinding;
 import com.codepath.flixster.databinding.ItemMoviesListBinding;
 import com.codepath.flixster.ui.moviedetails.MovieDetailsActivity;
 
@@ -70,23 +71,14 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class BackdropViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView ivBackdrop;
+        ItemMoviesListBackdropBinding binding;
 
         public BackdropViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivBackdrop = itemView.findViewById(R.id.movie_list_popular_image_view);
+            binding = ItemMoviesListBackdropBinding.bind(itemView);
 
             itemView.setOnClickListener(this);
-        }
-
-        public void bind(MovieListItem movie) {
-            Glide.with(context)
-                    .load(movie.getBackdropUrl())
-                    .placeholder(R.drawable.movie_placeholder)
-                    .error(R.drawable.movie_placeholder)
-                    .centerCrop()
-                    .into(ivBackdrop);
         }
 
         @Override
@@ -136,8 +128,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         MovieListItem movie = movies.get(position);
 
         if (holder.getItemViewType() == POPULAR) {
-            BackdropViewHolder viewHolder = (BackdropViewHolder) holder;
-            viewHolder.bind(movie);
+            ((BackdropViewHolder) holder).binding.setMovie(movie);
+            ((BackdropViewHolder) holder).binding.executePendingBindings();
         } else {
             ((ListItemViewHolder) holder).binding.setMovie(movie);
             ((ListItemViewHolder) holder).binding.executePendingBindings();
