@@ -85,10 +85,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class BackdropViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView ivBackdrop;
-        
+
         public BackdropViewHolder(@NonNull View itemView) {
             super(itemView);
-            
+
             ivBackdrop = itemView.findViewById(R.id.movie_list_popular_image_view);
 
             itemView.setOnClickListener(this);

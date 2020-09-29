@@ -10,6 +10,7 @@ import java.util.List;
 
 @Parcel
 public class MovieListItem {
+    public int id;
     public String title;
     public String overview;
     public String posterUrl;
@@ -19,6 +20,7 @@ public class MovieListItem {
     public MovieListItem() {}
 
     public MovieListItem(JSONObject movieObject) throws JSONException {
+        this.id = movieObject.getInt("id");
         this.title = movieObject.getString("title");
         this.overview = movieObject.getString("overview");
         this.posterUrl = movieObject.getString("poster_path");
@@ -34,6 +36,10 @@ public class MovieListItem {
         }
 
         return movies;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
