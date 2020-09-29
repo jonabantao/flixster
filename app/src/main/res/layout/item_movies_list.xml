@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/movie_list_container"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/movie_list_height"
-    android:padding="@dimen/list_item_padding">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/movie_list_image_view"
-        android:layout_width="@dimen/poster_width"
-        android:layout_height="@dimen/poster_height"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/margin_spacing"
-        android:transitionName="moviePoster"
-        tools:srcCompat="@tools:sample/avatars" />
+    <data>
 
-    <TextView
-        android:id="@+id/movie_list_title_text_view"
+        <variable
+            name="movie"
+            type="com.codepath.flixster.ui.movielistscreen.MovieListItem" />
+    </data>
+
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/movie_list_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/movie_list_image_view"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold"
-        android:transitionName="movieTitle"
-        tools:text="Mulan" />
+        android:layout_height="@dimen/movie_list_height"
+        android:padding="@dimen/list_item_padding">
 
-    <TextView
-        android:id="@+id/movie_list_overview_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/movie_list_title_text_view"
-        android:layout_toEndOf="@+id/movie_list_image_view"
-        android:ellipsize="end"
-        android:maxLines="8"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:transitionName="movieOverview"
-        tools:text="When the Emperor of China issues a decree that one man per family must serve in the Imperial Chinese Army to defend the country from Huns, Hua Mulan, the eldest daughter of an honored warrior, steps in to take the place of her ailing father. She is spirited, determined and quick on her feet. Disguised as a man by the name of Hua Jun, she is tested every step of the way and must harness her innermost strength and embrace her true potential." />
+        <ImageView
+            android:id="@+id/movie_list_image_view"
+            android:layout_width="@dimen/poster_width"
+            android:layout_height="@dimen/poster_height"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_spacing"
+            android:transitionName="moviePoster"
+            app:movieImageUrl="@{movie.posterUrl}"
+            tools:srcCompat="@tools:sample/avatars" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/movie_list_title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/movie_list_image_view"
+            android:text="@{movie.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:transitionName="movieTitle"
+            tools:text="Mulan" />
+
+        <TextView
+            android:id="@+id/movie_list_overview_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/movie_list_title_text_view"
+            android:layout_toEndOf="@+id/movie_list_image_view"
+            android:ellipsize="end"
+            android:maxLines="8"
+            android:text="@{movie.overview}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:transitionName="movieOverview"
+            tools:text="When the Emperor of China issues a decree that one man per family must serve in the Imperial Chinese Army to defend the country from Huns, Hua Mulan, the eldest daughter of an honored warrior, steps in to take the place of her ailing father. She is spirited, determined and quick on her feet. Disguised as a man by the name of Hua Jun, she is tested every step of the way and must harness her innermost strength and embrace her true potential." />
+
+    </RelativeLayout>
+</layout>

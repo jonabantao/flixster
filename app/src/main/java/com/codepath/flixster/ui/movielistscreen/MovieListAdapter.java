@@ -14,10 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
+import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.flixster.R;
+import com.codepath.flixster.databinding.ItemMoviesListBinding;
 import com.codepath.flixster.ui.moviedetails.MovieDetailsActivity;
 
 import org.parceler.Parcels;
@@ -34,41 +36,14 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     int POPULAR = 1;
 
     public class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView ivPoster;
-        TextView tvTitle;
-        TextView tvOverview;
+        ItemMoviesListBinding binding;
 
         public ListItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivPoster = itemView.findViewById(R.id.movie_list_image_view);
-            tvTitle = itemView.findViewById(R.id.movie_list_title_text_view);
-            tvOverview = itemView.findViewById(R.id.movie_list_overview_text_view);
+            binding = ItemMoviesListBinding.bind(itemView);
 
             itemView.setOnClickListener(this);
-        }
-
-
-        public void bind(final MovieListItem movie) {
-            tvTitle.setText(movie.getTitle());
-            tvOverview.setText(movie.getOverview());
-            // movie_placeholder from popcorn.app
-            Glide.with(context)
-                    .load(getMovieImage(movie))
-                    .transform(new RoundedCornersTransformation(10, 0))
-                    .placeholder(R.drawable.movie_placeholder)
-                    .error(R.drawable.movie_placeholder)
-                    .into(ivPoster);
-        }
-
-        private String getMovieImage(MovieListItem movie) {
-            Resources resources = context.getResources();
-
-            if (resources.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                return movie.getPosterUrl();
-            } else {
-                return movie.getBackdropUrl();
-            }
         }
 
         @Override
@@ -85,9 +60,9 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     (Activity) context,
-                    Pair.create((View) ivPoster, "moviePoster"),
-                    Pair.create((View) tvTitle, "movieTitle"),
-                    Pair.create((View) tvOverview, "movieOverview")
+                    Pair.create((View) binding.movieListImageView, "moviePoster"),
+                    Pair.create((View) binding.movieListTitleTextView, "movieTitle"),
+                    Pair.create((View) binding.movieListOverviewTextView, "movieOverview")
             );
 
             context.startActivity(intent, options.toBundle());
@@ -164,8 +139,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             BackdropViewHolder viewHolder = (BackdropViewHolder) holder;
             viewHolder.bind(movie);
         } else {
-            ListItemViewHolder viewHolder = (ListItemViewHolder) holder;
-            viewHolder.bind(movie);
+            ((ListItemViewHolder) holder).binding.setMovie(movie);
+            ((ListItemViewHolder) holder).binding.executePendingBindings();
         }
     }
 
