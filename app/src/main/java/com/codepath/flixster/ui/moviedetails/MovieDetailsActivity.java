@@ -1,25 +1,18 @@
 package com.codepath.flixster.ui.moviedetails;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import androidx.databinding.DataBindingUtil;
+
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.codepath.flixster.R;
 import com.codepath.flixster.databinding.ActivityMovieDetailsBinding;
-import com.codepath.flixster.ui.movielistscreen.MovieListActivity;
 import com.codepath.flixster.ui.movielistscreen.MovieListItem;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;

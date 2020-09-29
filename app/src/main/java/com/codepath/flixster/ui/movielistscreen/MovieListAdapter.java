@@ -3,21 +3,15 @@ package com.codepath.flixster.ui.movielistscreen;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
-import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.codepath.flixster.R;
 import com.codepath.flixster.databinding.ItemMoviesListBackdropBinding;
 import com.codepath.flixster.databinding.ItemMoviesListBinding;
@@ -26,8 +20,6 @@ import com.codepath.flixster.ui.moviedetails.MovieDetailsActivity;
 import org.parceler.Parcels;
 
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
